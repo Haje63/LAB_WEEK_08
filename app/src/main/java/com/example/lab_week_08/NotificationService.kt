@@ -177,24 +177,32 @@ class NotificationService : Service() {
         return returnValue
     }
 //A function to update the notification to display a count down from 10 to 0
-    private fun countDownFromTenToZero(notificationBuilder:
-                                       NotificationCompat.Builder) {
-        //Gets the notification manager
-        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as
-                NotificationManager
-        //Count down from 10 to 0
-        for (i in 10 downTo 0) {
-            Thread.sleep(1000L)
-            //Updates the notification content text
-            notificationBuilder.setContentText("$i seconds until last warning")
-                .setSilent(true)
-            //Notify the notification manager about the content update
-            notificationManager.notify(
-                NOTIFICATION_ID,
-                notificationBuilder.build()
-            )
+private fun countDownFromTenToZero(notificationBuilder:
+                                   NotificationCompat.Builder) {
+    val notificationManager = getSystemService(NOTIFICATION_SERVICE) as
+            NotificationManager
+
+    for (i in 10 downTo 0) {
+        // 1. UPDATE TAMPILAN NOTIFIKASI DULU
+        notificationBuilder.setContentText("$i seconds until last warning")
+            .setSilent(true)
+        notificationManager.notify(
+            NOTIFICATION_ID,
+            notificationBuilder.build()
+        )
+
+        // 2. BARU TIDUR (Sleep)
+        // Kita cek (i > 0) agar setelah menampilkan "0 seconds",
+        // dia tidak tidur 1 detik lagi secara percuma.
+        if (i > 0) {
+            try {
+                Thread.sleep(1000L)
+            } catch (e: InterruptedException) {
+                // Tangani interupsi jika perlu
+            }
         }
     }
+}
     //Update the LiveData with the returned channel id through the Main Thread
 //the Main Thread is identified by calling the "getMainLooper()" method
 //This function is called after the count down has completed
