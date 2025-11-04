@@ -11,3 +11,7 @@
 ## Link Aplikasi
 
 [Klik di sini](https://drive.google.com/file/d/1IbEdSp96AqRKwL2i9auisjsMBU_EORv7/view?usp=sharing)
+
+## Link Video
+
+[Klik di sini](https://drive.google.com/file/d/19BWFPUcUX7dQ6o49DFTiH64nU7mT4JsT/view?usp=sharing)
